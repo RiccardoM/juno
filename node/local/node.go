@@ -82,7 +82,7 @@ func NewNode(config *Details, txConfig client.TxConfig, codec codec.Codec) (*Nod
 	tmCfg.SetRoot(config.Home)
 
 	// Build the local node
-	dbProvider := tmnode.DefaultDBProvider
+	dbProvider := cfg.DefaultDBProvider
 	genesisDocProvider := tmnode.DefaultGenesisDocProviderFunc(tmCfg)
 	logger := log.NewTMLogger(log.NewSyncWriter(os.Stdout)).With("module", "explorer")
 	clientCreator := proxy.DefaultClientCreator(tmCfg.ProxyApp, tmCfg.ABCI, tmCfg.DBDir())
@@ -120,11 +120,11 @@ func NewNode(config *Details, txConfig client.TxConfig, codec codec.Codec) (*Nod
 		return nil, err
 	}
 
-	csMetrics, _, _, smMetrics, proxyMetrics := metricsProvider(genDoc.ChainID)
+	csMetrics, _, _, smMetrics, proxyMetrics, _, _ := metricsProvider(genDoc.ChainID)
 
 	proxyApp := proxy.NewAppConns(clientCreator, proxyMetrics)
 
-	evidenceDB, err := dbProvider(&tmnode.DBContext{ID: "evidence", Config: tmCfg})
+	evidenceDB, err := dbProvider(&cfg.DBContext{ID: "evidence", Config: tmCfg})
 	if err != nil {
 		return nil, err
 	}
@@ -142,6 +142,7 @@ func NewNode(config *Details, txConfig client.TxConfig, codec codec.Codec) (*Nod
 		proxyApp.Consensus(),
 		nil,
 		evidencePool,
+		blockStore,
 		sm.BlockExecutorWithMetrics(smMetrics),
 	)
 
@@ -172,15 +173,15 @@ func NewNode(config *Details, txConfig client.TxConfig, codec codec.Codec) (*Nod
 	}, nil
 }
 
-func initDBs(config *cfg.Config, dbProvider tmnode.DBProvider) (blockStore *store.BlockStore, stateDB dbm.DB, err error) {
+func initDBs(config *cfg.Config, dbProvider cfg.DBProvider) (blockStore *store.BlockStore, stateDB dbm.DB, err error) {
 	var blockStoreDB dbm.DB
-	blockStoreDB, err = dbProvider(&tmnode.DBContext{ID: "blockstore", Config: config})
+	blockStoreDB, err = dbProvider(&cfg.DBContext{ID: "blockstore", Config: config})
 	if err != nil {
 		return
 	}
 	blockStore = store.NewBlockStore(blockStoreDB)
 
-	stateDB, err = dbProvider(&tmnode.DBContext{ID: "state", Config: config})
+	stateDB, err = dbProvider(&cfg.DBContext{ID: "state", Config: config})
 	if err != nil {
 		return
 	}
@@ -199,7 +200,7 @@ func createAndStartEventBus(logger log.Logger) (*tmtypes.EventBus, error) {
 
 func createAndStartIndexerService(
 	config *cfg.Config,
-	dbProvider tmnode.DBProvider,
+	dbProvider cfg.DBProvider,
 	eventBus *tmtypes.EventBus,
 	logger log.Logger,
 ) (*txindex.IndexerService, txindex.TxIndexer, indexer.BlockIndexer, error) {
@@ -211,7 +212,7 @@ func createAndStartIndexerService(
 
 	switch config.TxIndex.Indexer {
 	case "kv":
-		store, err := dbProvider(&tmnode.DBContext{ID: "tx_index", Config: config})
+		store, err := dbProvider(&cfg.DBContext{ID: "tx_index", Config: config})
 		if err != nil {
 			return nil, nil, nil, err
 		}
@@ -370,18 +371,17 @@ func (cp *Node) BlockResults(height int64) (*tmctypes.ResultBlockResults, error)
 		return nil, err
 	}
 
-	results, err := cp.stateStore.LoadABCIResponses(height)
+	results, err := cp.stateStore.LoadFinalizeBlockResponse(height)
 	if err != nil {
 		return nil, err
 	}
 
 	return &tmctypes.ResultBlockResults{
 		Height:                height,
-		TxsResults:            results.DeliverTxs,
-		BeginBlockEvents:      results.BeginBlock.Events,
-		EndBlockEvents:        results.EndBlock.Events,
-		ValidatorUpdates:      results.EndBlock.ValidatorUpdates,
-		ConsensusParamUpdates: results.EndBlock.ConsensusParamUpdates,
+		TxsResults:            results.TxResults,
+		FinalizeBlockEvents:   results.Events,
+		ValidatorUpdates:      results.ValidatorUpdates,
+		ConsensusParamUpdates: results.ConsensusParamUpdates,
 	}, nil
 }
 
