@@ -2,8 +2,6 @@ module github.com/forbole/juno/v5
 
 go 1.21
 
-toolchain go1.22.3
-
 require (
 	cosmossdk.io/log v1.3.1
 	cosmossdk.io/store v1.1.0
