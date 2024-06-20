@@ -1,9 +1,9 @@
 package messages
 
 import (
-	"github.com/forbole/juno/v5/database"
-	"github.com/forbole/juno/v5/modules"
-	"github.com/forbole/juno/v5/types"
+	"github.com/forbole/juno/v6/database"
+	"github.com/forbole/juno/v6/modules"
+	"github.com/forbole/juno/v6/types"
 )
 
 var _ modules.Module = &Module{}

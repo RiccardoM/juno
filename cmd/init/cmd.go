@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/forbole/juno/v5/types/config"
+	"github.com/forbole/juno/v6/types/config"
 
 	"github.com/spf13/cobra"
 )

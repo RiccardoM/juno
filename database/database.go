@@ -1,11 +1,11 @@
 package database
 
 import (
-	"github.com/forbole/juno/v5/logging"
+	"github.com/forbole/juno/v6/logging"
 
-	databaseconfig "github.com/forbole/juno/v5/database/config"
+	databaseconfig "github.com/forbole/juno/v6/database/config"
 
-	"github.com/forbole/juno/v5/types"
+	"github.com/forbole/juno/v6/types"
 )
 
 // Database represents an abstract database that can be used to save data inside it

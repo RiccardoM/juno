@@ -1,12 +1,12 @@
 package types
 
 import (
-	"github.com/forbole/juno/v5/logging"
-	"github.com/forbole/juno/v5/types/config"
+	"github.com/forbole/juno/v6/logging"
+	"github.com/forbole/juno/v6/types/config"
 
-	"github.com/forbole/juno/v5/database"
-	"github.com/forbole/juno/v5/database/builder"
-	"github.com/forbole/juno/v5/modules/registrar"
+	"github.com/forbole/juno/v6/database"
+	"github.com/forbole/juno/v6/database/builder"
+	"github.com/forbole/juno/v6/modules/registrar"
 )
 
 // Config contains all the configuration for the "parse" command

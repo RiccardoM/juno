@@ -32,8 +32,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/tx"
 	"github.com/spf13/viper"
 
-	"github.com/forbole/juno/v5/node"
-	"github.com/forbole/juno/v5/types"
+	"github.com/forbole/juno/v6/node"
+	"github.com/forbole/juno/v6/types"
 
 	dbm "github.com/cometbft/cometbft-db"
 	constypes "github.com/cometbft/cometbft/consensus/types"

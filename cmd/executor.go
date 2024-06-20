@@ -5,14 +5,14 @@ import (
 	"os"
 	"path"
 
-	"github.com/forbole/juno/v5/types/config"
+	"github.com/forbole/juno/v6/types/config"
 
-	initcmd "github.com/forbole/juno/v5/cmd/init"
-	migratecmd "github.com/forbole/juno/v5/cmd/migrate"
-	parsecmd "github.com/forbole/juno/v5/cmd/parse"
-	startcmd "github.com/forbole/juno/v5/cmd/start"
+	initcmd "github.com/forbole/juno/v6/cmd/init"
+	migratecmd "github.com/forbole/juno/v6/cmd/migrate"
+	parsecmd "github.com/forbole/juno/v6/cmd/parse"
+	startcmd "github.com/forbole/juno/v6/cmd/start"
 
-	"github.com/forbole/juno/v5/types"
+	"github.com/forbole/juno/v6/types"
 
 	"github.com/cometbft/cometbft/libs/cli"
 	"github.com/spf13/cobra"

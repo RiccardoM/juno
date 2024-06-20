@@ -3,10 +3,10 @@ package config
 import (
 	"strings"
 
-	databaseconfig "github.com/forbole/juno/v5/database/config"
-	loggingconfig "github.com/forbole/juno/v5/logging/config"
-	nodeconfig "github.com/forbole/juno/v5/node/config"
-	parserconfig "github.com/forbole/juno/v5/parser/config"
+	databaseconfig "github.com/forbole/juno/v6/database/config"
+	loggingconfig "github.com/forbole/juno/v6/logging/config"
+	nodeconfig "github.com/forbole/juno/v6/node/config"
+	parserconfig "github.com/forbole/juno/v6/parser/config"
 	"gopkg.in/yaml.v3"
 )
 

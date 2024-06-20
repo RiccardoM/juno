@@ -20,6 +20,8 @@ node:
     grpc:
       insecure: true
       address: localhost:9090
+    api:
+      address: localhost:1317
 
 parsing:
   fast_sync: true
@@ -71,7 +73,7 @@ Currently we support the followings Cosmos modules:
 - `auth` to parse the `x/auth` data
 - `bank` to parse the `x/bank` data
 - `distribution` to parse the `x/distribution` data
-- `gov` to parse the `x/gox` data
+- `gov` to parse the `x/gov` data
 - `mint` to parse the `x/mint` data
 - `slashing` to parse the `x/slashing` data
 - `staking` to parse the `x/staking` data
@@ -98,6 +100,7 @@ A remote node is the default implementation of a node. It relies on both an RPC 
 | :-------: | :---: | :--------- | :------ |
 | `rpc` | `object` | Contains the RPC configuration data | | 
 | `grpc` | `object` | Contains the gRPC configuration data | | 
+| `api` | `object` | Contains the REST API configuration data | |
 
 #### `rpc`
 | Attribute | Type | Description | Example |
@@ -111,6 +114,11 @@ A remote node is the default implementation of a node. It relies on both an RPC 
 | :-------: | :---: | :--------- | :------ |
 | `address` | `string` | Address of the gRPC endpoint | `localhost:9090` |
 | `insecure` | `boolean` | Whether the gRPC endpoint is insecure or not | `false` |
+
+#### `api`
+| Attribute | Type | Description | Example |
+| :-------: | :---: | :--------- | :------ |
+| `address` | `string` | Address of the REST API endpoint | `localhost:1317` |
 
 ### Local node
 A local node reads the data to be parsed from a local directory referred to as `home`. If you want to use this kind of node, you need to set the [`node`](#node) type to `local` and then set the following attributes of the configuration.

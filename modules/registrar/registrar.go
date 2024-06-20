@@ -3,20 +3,20 @@ package registrar
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/forbole/juno/v5/node"
+	"github.com/forbole/juno/v6/node"
 
-	"github.com/forbole/juno/v5/modules/telemetry"
+	"github.com/forbole/juno/v6/modules/telemetry"
 
-	"github.com/forbole/juno/v5/logging"
+	"github.com/forbole/juno/v6/logging"
 
-	"github.com/forbole/juno/v5/types/config"
+	"github.com/forbole/juno/v6/types/config"
 
-	"github.com/forbole/juno/v5/modules/pruning"
+	"github.com/forbole/juno/v6/modules/pruning"
 
-	"github.com/forbole/juno/v5/modules"
-	"github.com/forbole/juno/v5/modules/messages"
+	"github.com/forbole/juno/v6/modules"
+	"github.com/forbole/juno/v6/modules/messages"
 
-	"github.com/forbole/juno/v5/database"
+	"github.com/forbole/juno/v6/database"
 )
 
 // Context represents the context of the modules registrar

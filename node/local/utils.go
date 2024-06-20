@@ -14,7 +14,7 @@ import (
 	"github.com/cosmos/gogoproto/proto"
 	"github.com/spf13/viper"
 
-	"github.com/forbole/juno/v5/types"
+	"github.com/forbole/juno/v6/types"
 )
 
 func ParseConfig() (*cfg.Config, error) {

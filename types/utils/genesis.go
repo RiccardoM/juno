@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/forbole/juno/v5/node"
+	"github.com/forbole/juno/v6/node"
 
 	tmjson "github.com/cometbft/cometbft/libs/json"
 	tmos "github.com/cometbft/cometbft/libs/os"
