@@ -9,7 +9,6 @@
 ### Dependencies
 - ([\#119](https://github.com/forbole/juno/pull/119)) Updated cosmos-sdk to v0.50.x
 
-
 ### Migrations
 
 Now the api config is required in remote mode, please check the [reference](./.docs/config.md#remote-node) and add the field into your config after upgrading Juno to v6.
