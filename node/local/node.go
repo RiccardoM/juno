@@ -120,6 +120,7 @@ func NewNode(config *Details, txConfig client.TxConfig, codec codec.Codec) (*Nod
 		return nil, err
 	}
 
+	//nolint: dogsled
 	csMetrics, _, _, smMetrics, proxyMetrics, _, _ := metricsProvider(genDoc.ChainID)
 
 	proxyApp := proxy.NewAppConns(clientCreator, proxyMetrics)
