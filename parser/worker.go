@@ -295,6 +295,35 @@ func (w Worker) handleMessage(index int, msg types.Message, tx *types.Transactio
 				w.logger.MsgError(module, tx, msg, err)
 			}
 		}
+
+		// If it's a MsgExecute, we need to make sure the included messages are handled as well
+		if msg.GetType() == "/cosmos.authz.v1beta1.MsgExec" {
+			var msgExec struct {
+				Msgs []json.RawMessage `json:"msgs"`
+			}
+
+			err := json.Unmarshal(msg.GetBytes(), &msgExec)
+			if err != nil {
+				w.logger.Error("unable to unmarshal MsgExec inner messages", "error", err)
+				return
+			}
+
+			for authzIndex, msgAny := range msgExec.Msgs {
+				executedMsg, err := types.UnmarshalMessage(authzIndex, msgAny)
+				if err != nil {
+					w.logger.Error("unable to unpack MsgExec inner message", "index", authzIndex, "error", err)
+				}
+
+				for _, module := range w.modules {
+					if messageModule, ok := module.(modules.AuthzMessageModule); ok {
+						err = messageModule.HandleMsgExec(index, authzIndex, executedMsg, tx)
+						if err != nil {
+							w.logger.MsgError(module, tx, executedMsg, err)
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

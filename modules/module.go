@@ -4,11 +4,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/cosmos/cosmos-sdk/x/authz"
-
 	tmctypes "github.com/cometbft/cometbft/rpc/core/types"
 	tmtypes "github.com/cometbft/cometbft/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/go-co-op/gocron"
 
 	"github.com/forbole/juno/v6/types"
@@ -106,5 +103,5 @@ type AuthzMessageModule interface {
 	// are passed as well.
 	// NOTE. The returned error will be logged using the MsgError method. All other modules' handlers
 	// will still be called.
-	HandleMsgExec(index int, msgExec *authz.MsgExec, authzMsgIndex int, executedMsg sdk.Msg, tx *types.Transaction) error
+	HandleMsgExec(index int, authzMsgIndex int, executedMsg types.Message, tx *types.Transaction) error
 }
