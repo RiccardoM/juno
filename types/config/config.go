@@ -3,11 +3,12 @@ package config
 import (
 	"strings"
 
+	"gopkg.in/yaml.v3"
+
 	databaseconfig "github.com/forbole/juno/v6/database/config"
 	loggingconfig "github.com/forbole/juno/v6/logging/config"
 	nodeconfig "github.com/forbole/juno/v6/node/config"
 	parserconfig "github.com/forbole/juno/v6/parser/config"
-	"gopkg.in/yaml.v3"
 )
 
 var (

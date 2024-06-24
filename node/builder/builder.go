@@ -5,6 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
+
 	"github.com/forbole/juno/v6/node"
 	nodeconfig "github.com/forbole/juno/v6/node/config"
 	"github.com/forbole/juno/v6/node/local"
