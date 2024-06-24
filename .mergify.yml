@@ -16,3 +16,11 @@ pull_request_rules:
           {{ title }} (#{{ number }})
           
           {{ body }}
+  - name: backport patches to v0.47.x branch
+    conditions:
+      - base=cosmos/v0.50.x
+      - label=backport/v0.47.x
+    actions:
+      backport:
+        branches:
+          - cosmos/v0.47.x
