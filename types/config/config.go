@@ -3,11 +3,20 @@ package config
 import (
 	"strings"
 
+<<<<<<< HEAD
 	databaseconfig "github.com/forbole/juno/v5/database/config"
 	loggingconfig "github.com/forbole/juno/v5/logging/config"
 	nodeconfig "github.com/forbole/juno/v5/node/config"
 	parserconfig "github.com/forbole/juno/v5/parser/config"
 	"gopkg.in/yaml.v3"
+=======
+	"gopkg.in/yaml.v3"
+
+	databaseconfig "github.com/forbole/juno/v6/database/config"
+	loggingconfig "github.com/forbole/juno/v6/logging/config"
+	nodeconfig "github.com/forbole/juno/v6/node/config"
+	parserconfig "github.com/forbole/juno/v6/parser/config"
+>>>>>>> 7327795 (fix: added back authz message handler in worker (#121))
 )
 
 var (
