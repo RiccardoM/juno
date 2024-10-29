@@ -1,6 +1,8 @@
 package registrar
 
 import (
+	"slices"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/forbole/juno/v6/node"
@@ -95,12 +97,21 @@ func (r *DefaultRegistrar) BuildModules(ctx Context) modules.Modules {
 // For each module name that is specified but not found, a warning log is printed.
 func GetModules(mods modules.Modules, names []string, logger logging.Logger) []modules.Module {
 	var modulesImpls []modules.Module
-	for _, name := range names {
-		module, found := mods.FindByName(name)
-		if found {
-			modulesImpls = append(modulesImpls, module)
-		} else {
-			logger.Error("Module is required but not registered. Be sure to register it using registrar.RegisterModule", "module", name)
+
+	for _, mod := range mods {
+		if slices.Contains(names, mod.Name()) {
+			modulesImpls = append(modulesImpls, mod)
+		}
+	}
+
+	if len(modulesImpls) != len(names) {
+		for _, name := range names {
+			found := slices.ContainsFunc(modulesImpls, func(n modules.Module) bool {
+				return n.Name() == name
+			})
+			if !found {
+				logger.Error("Module is required but not registered. Be sure to register it using registrar.RegisterModule", "module", name)
+			}
 		}
 	}
 	return modulesImpls
