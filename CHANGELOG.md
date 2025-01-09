@@ -9,7 +9,7 @@
 
 ### Database
 - ([\#110](https://github.com/forbole/juno/pull/110)) Fixed initialization of involved account addresses slice
-- ([\#114](https://github.com/forbole/juno/pull/114)) Changed colum type from JSON into JSONB for message-related field
+- ([\#114](https://github.com/forbole/juno/pull/114)) Changed column type from JSON into JSONB for message-related field
 
 ### Dependencies
 - ([\#119](https://github.com/forbole/juno/pull/119)) Updated cosmos-sdk to v0.50.x
